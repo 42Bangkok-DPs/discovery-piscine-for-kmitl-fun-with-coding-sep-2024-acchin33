@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="left">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="text" id="right">
+        <input type="submit" value="Try me!" id="calculateButton">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#calculateButton').click(function() {
+                const leftstr = $('#left').val();
+                const operator = $('#operator').val();
+                const rightstr = $('#right').val();
+                const left = parseFloat(leftstr);
+                const right = parseFloat(rightstr);
+                const regex = /[\+\-\*\/%\s\.]/;
+
+                if (isNaN(left) || isNaN(right) || (left) < 0 || (right) < 0 || regex.test(left) || regex.test(right)) {
+                    alert('Error :(');
+                    console.log('Error :(');
+                    return;
+                }
+                
+                if ((operator === '/' || operator === '%') && right === 0) {
+                    alert("It's over 9000!");
+                    console.log("It's over 9000!");
+                    return;
+                }
+
+                let result;
+                switch (operator) {
+                    case '+':
+                        result = left + right;
+                        break;
+                    case '-':
+                        result = left - right;
+                        break;
+                    case '*':
+                        result = left * right;
+                        break;
+                    case '/':
+                        result = left / right;
+                        break;
+                    case '%':
+                        result = left % right;
+                        break;
+                }
+
+                alert('Result: ' + result);
+                console.log('Result: ' + result);
+            });
+
+        });
+    </script>
+</body>
+</html>
